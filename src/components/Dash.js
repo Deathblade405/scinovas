@@ -12,8 +12,19 @@ function Dash() {
     { id: 3, drug: 'Aspirin', brand: 'Disprin', manufacturer: 'Bayer', license: '11223', company: 'Bayer Pharma' },
   ]);
 
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   const handleLogout = () => {
-    navigate('/'); // Navigate back to login
+    setShowLogoutModal(true); // Show the logout confirmation modal
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
+    navigate('/'); // Navigate back to login after confirming logout
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutModal(false); // Close the modal if canceled
   };
 
   const handleFilterChange = (e) => {
@@ -84,6 +95,19 @@ function Dash() {
           </tbody>
         </table>
       </div>
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutModal && (
+        <div className="logout-modal">
+          <div className="modal-content">
+            <p>Are you sure you want to logout?</p>
+            <div className="modal-actions">
+              <button onClick={confirmLogout} className="modal-button">Yes</button>
+              <button onClick={cancelLogout} className="modal-button">No</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
