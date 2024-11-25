@@ -1,0 +1,31 @@
+/* Footer */
+.footer {
+    text-align: center;
+    font-size: 0.9em;
+    padding: 20px 40px;
+    background-color: #263859;
+    color: #ffffff;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  
+  .footer p {
+    margin: 0;
+    color: #ccd6f6;
+  }
+  
+  .footer .powered-by {
+    margin-top: 8px; /* Add some space above "Powered by CIIRC" */
+    font-size: 0.8em; /* Optional: make the "Powered by CIIRC" text smaller */
+  }
+  
+  .footer .powered-by a {
+    color: #ccd6f6;
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease;
+  }
+  
+  .footer .powered-by a:hover {
+    color: #ffd700; /* Change color on hover for better interactivity */
+  }
+  

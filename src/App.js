@@ -1,24 +1,50 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
+import Dash from './components/Dash'; // Import the Dash component (formerly Dashboard)
+import InfoSection from './components/InfoSection';
 import './App.css';
+import './components/Responsive.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {/* Header Section */}
+      <Header />
+
+      <Routes>
+        {/* Route for Login Form */}
+        <Route
+          path="/"
+          element={
+            <div className="main-content">
+              <InfoSection /> {/* Info Section */}
+              <LoginForm />   {/* Login Form */}
+            </div>
+          }
+        />
+
+        {/* Route for Signup Form */}
+        <Route
+          path="/signup"
+          element={
+            <div className="main-content">
+              <InfoSection /> {/* Info Section */}
+              <SignupForm />  {/* Signup Form */}
+            </div>
+          }
+        />
+
+        {/* Route for Dashboard */}
+        <Route path="/dashboard" element={<Dash />} /> {/* Update the route to use Dash component */}
+      </Routes>
+
+      {/* Footer Section */}
+      <Footer />
+    </Router>
   );
 }
 
