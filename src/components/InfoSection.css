@@ -1,41 +1,74 @@
 /* Info Section */
 .info-section {
-    width: 60%;
-    padding: 30px 35px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 60%; /* Default width for larger screens */
+  padding: 30px 35px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 15px auto; /* Center the section */
+}
+
+/* Title Styling */
+.info-section h2 {
+  color: #263859;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  border-left: 4px solid #ffd700;
+  padding-left: 15px;
+  font-weight: 600;
+}
+
+/* Paragraph Styling */
+.info-section p {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+/* List Styling */
+.info-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #333;
+  line-height: 1.8;
+}
+
+/* List Item Styling */
+.info-section li {
+  margin-bottom: 10px;
+  color: #666;
+}
+
+/* Hover Effects */
+.info-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .info-section {
+      width: 90%; /* Take up most of the screen width */
+      padding: 20px 15px; /* Reduce padding for smaller screens */
+      margin: 10px auto; /* Maintain spacing on all sides */
   }
-  
+
   .info-section h2 {
-    color: #263859;
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    border-left: 4px solid #ffd700;
-    padding-left: 15px;
-    font-weight: 600;
+      font-size: 1.5em; /* Adjust heading size for smaller screens */
+      margin-bottom: 15px; /* Reduce spacing below the heading */
   }
-  
+
   .info-section p {
-    margin-bottom: 15px;
-    color: #555;
+      font-size: 0.95rem; /* Slightly smaller text for better fit */
+      margin-bottom: 12px;
   }
-  
+
   .info-section ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    color: #333;
-    line-height: 1.8;
+      padding-left: 15px; /* Adjust padding for a more compact layout */
   }
-  
+
   .info-section li {
-    margin-bottom: 10px;
-    color: #666;
+      font-size: 0.9rem; /* Slightly smaller text for list items */
+      margin-bottom: 8px;
   }
-  
-  .info-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
-  }
-  
+}
