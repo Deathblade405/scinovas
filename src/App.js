@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import Dash from './components/Dash'; // Import the Dash component (formerly Dashboard)
 import InfoSection from './components/InfoSection';
+import Admins from './components/Admins'; // Import the Admins component
 import './App.css';
 import './components/Responsive.css';
 
@@ -40,6 +41,9 @@ function App() {
 
         {/* Route for Dashboard */}
         <Route path="/dashboard" element={<Dash />} /> {/* Update the route to use Dash component */}
+
+        {/* Route for Admins */}
+        <Route path="/admins" element={<Admins />} /> {/* New route for Admins component */}
       </Routes>
 
       {/* Footer Section */}

@@ -6,7 +6,6 @@ function Dash() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState('');
   const [tableData, setTableData] = useState([
-    // Sample data for demonstration
     { id: 1, drug: 'Paracetamol', brand: 'Panadol', manufacturer: 'GSK', license: '12345', company: 'GSK Pharma' },
     { id: 2, drug: 'Ibuprofen', brand: 'Advil', manufacturer: 'Pfizer', license: '67890', company: 'Pfizer Ltd' },
     { id: 3, drug: 'Aspirin', brand: 'Disprin', manufacturer: 'Bayer', license: '11223', company: 'Bayer Pharma' },
@@ -39,15 +38,12 @@ function Dash() {
 
   return (
     <div className="dashboard">
-      {/* Container for logout and other action buttons */}
+      {/* Header */}
       <div className="dashboard-header">
-        {/* Actions (Admins and Generate Test QR buttons) */}
         <div className="dashboard-actions">
-          <button className="action-button">Admins</button>
+        <button className="action-button" onClick={() => navigate('/admins')}>Admins</button>
           <button className="action-button">Generate Test QR</button>
         </div>
-
-        {/* Logout Button */}
         <div className="logout-container">
           <button onClick={handleLogout} className="logout-button">Logout</button>
         </div>
@@ -55,12 +51,16 @@ function Dash() {
 
       {/* Filter */}
       <div className="dashboard-filter">
-        <input
-          type="text"
-          placeholder="Filter table..."
-          value={filter}
-          onChange={handleFilterChange}
-        />
+        <div className="input-wrapper">
+          <input
+            type="text"
+            id="filter-input"
+            placeholder=" "
+            value={filter}
+            onChange={handleFilterChange}
+          />
+          <label htmlFor="filter-input">Filter table...</label>
+        </div>
       </div>
 
       {/* Table */}
@@ -87,7 +87,6 @@ function Dash() {
                 <td>{row.license}</td>
                 <td>{row.company}</td>
                 <td>
-                  {/* Replacing View and Edit buttons with "Batch Management" */}
                   <button className="action-button">Batch Management</button>
                 </td>
               </tr>
