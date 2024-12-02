@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaUserAlt, FaEye, FaEyeSlash, FaLock, FaRegWindowClose } from 'react-icons/fa'; // Changed icon here
+import { FaUserAlt, FaEye, FaEyeSlash, FaLock, FaRegWindowClose } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
@@ -10,6 +10,10 @@ function LoginForm() {
   const [error, setError] = useState({ username: '', password: '' });
   const navigate = useNavigate();
 
+  // SuperAdmin credentials
+  const SUPERADMIN_USERNAME = 'padmaraj';
+  const SUPERADMIN_PASSWORD = 'padmaraj@2024';
+
   // Function to validate the form
   const validateForm = () => {
     let isValid = true;
@@ -17,7 +21,8 @@ function LoginForm() {
 
     // Username validation
     if (username === '') {
-      newError.username = ''; // Clear error if username is empty
+      newError.username = 'Username cannot be empty.';
+      isValid = false;
     } else if (username.length < 3) {
       newError.username = 'Username must be at least 3 characters long.';
       isValid = false;
@@ -25,7 +30,8 @@ function LoginForm() {
 
     // Password validation
     if (password === '') {
-      newError.password = ''; // Clear error if password is empty
+      newError.password = 'Password cannot be empty.';
+      isValid = false;
     } else if (password.length < 6) {
       newError.password = 'Password must be at least 6 characters long.';
       isValid = false;
@@ -38,6 +44,14 @@ function LoginForm() {
   // Trigger validation on form submit
   const handleLogin = (e) => {
     e.preventDefault();
+
+    // Check for SuperAdmin credentials
+    if (username === SUPERADMIN_USERNAME && password === SUPERADMIN_PASSWORD) {
+      console.log('SuperAdmin logged in!');
+      navigate('/admin'); // Redirect to the Admins page
+      return;
+    }
+
     if (!validateForm()) return;
 
     console.log('Logged in with:', username, password);
@@ -60,11 +74,6 @@ function LoginForm() {
   const goToSignup = () => {
     navigate('/signup');
   };
-
-  // Effect to re-validate the form when username or password changes
-  useEffect(() => {
-    validateForm(); // Re-validate form whenever the username or password changes
-  }, [username, password]);
 
   // Reset the form fields
   const handleReset = () => {
@@ -108,7 +117,6 @@ function LoginForm() {
 
         <div className="form-buttons">
           <button type="submit">Login</button>
-          {/* Reset icon updated to a different symbol (FaRegWindowClose) */}
           <FaRegWindowClose onClick={handleReset} className="reset-icon" />
         </div>
 
