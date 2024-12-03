@@ -98,6 +98,7 @@ body {
 .admin-table-container {
     margin-top: 40px;
     overflow: auto;
+    color: white;
 }
 
 .admin-table {
@@ -423,3 +424,40 @@ body {
         padding: 10px;
     }
 }
+
+
+/* Dark blue-themed and small country prefix dropdown */
+.admin-input-select {
+    padding: 4px 8px;
+    border-radius: 10px;
+    border: 1px solid  #567293; /* Dark blue border */
+    background-color:   #243447; /* Dark blue background */
+    color: white; /* White text color */
+    font-size: 0.85rem;
+    width: 80px; 
+    height: 43px;/* Small width for the select box */
+    cursor: pointer;
+    appearance: none; /* Removes default dropdown arrow in some browsers */
+  }
+  
+  /* Adjusting the dropdown on mobile screens */
+  @media (max-width: 768px) {
+    .admin-input-select {
+      width: 60px; /* Smaller dropdown on mobile */
+      font-size: 0.75rem; /* Slightly smaller font on mobile */
+      padding: 4px 6px; /* Adjust padding for mobile */
+    }
+  }
+  
+  /* Optional: Styling for the custom dropdown arrow on mobile (optional, if you want) */
+  .admin-input-select::-ms-expand {
+    display: none; /* Hide default dropdown arrow in IE */
+  }
+  
+  /* Adding better focus state for accessibility */
+  .admin-input-select:focus {
+    outline: 2px solid #59779c; /* Lighter blue focus outline */
+    background-color: #243447; /* Slightly darker blue when focused */
+    border-color: #243447;
+  }
+

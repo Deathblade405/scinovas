@@ -10,6 +10,8 @@ function Admin() {
     companyName: '',
     companyDesc: '',
     companyLogo: null,
+    phoneNumber: '', // Added phone number
+    countryPrefix: '+1', // Default country prefix
   });
   const [admins, setAdmins] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
@@ -17,9 +19,38 @@ function Admin() {
   const [modalType, setModalType] = useState(null);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); // State for logout modal
 
+  const countryPrefixes = [
+    { code: '+1', name: 'USA/Canada' },
+    { code: '+44', name: 'UK' },
+    { code: '+91', name: 'India' },
+    { code: '+61', name: 'Australia' },
+    { code: '+33', name: 'France' },
+    { code: '+49', name: 'Germany' },
+    { code: '+81', name: 'Japan' },
+    { code: '+55', name: 'Brazil' },
+    // Add more country prefixes here as needed
+  ];
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewAdmin((prev) => ({ ...prev, [name]: value }));
+    
+    // If phoneNumber is changed, allow only digits
+    if (name === 'phoneNumber') {
+      const sanitizedValue = value.replace(/\D/g, ''); // Removes any non-numeric characters
+      setNewAdmin((prev) => ({
+        ...prev,
+        phoneNumber: sanitizedValue, // Store the phone number without the prefix
+      }));
+    } else {
+      setNewAdmin((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleCountryPrefixChange = (e) => {
+    setNewAdmin((prev) => ({
+      ...prev,
+      countryPrefix: e.target.value, // Update country prefix
+    }));
   };
 
   const handleFileChange = (e) => {
@@ -44,6 +75,8 @@ function Admin() {
       companyName: '',
       companyDesc: '',
       companyLogo: null,
+      phoneNumber: '', // Reset phone number
+      countryPrefix: '+1', // Reset to default country prefix
     });
     setEditIndex(null);
   };
@@ -116,6 +149,32 @@ function Admin() {
           placeholder="Enter company description"
           className="admin-input"
         />
+        
+        {/* Phone Number field with dropdown for country prefix */}
+        <div className="phone-input-container">
+          <select
+            name="countryPrefix"
+            value={newAdmin.countryPrefix}
+            onChange={handleCountryPrefixChange}
+            className="admin-input-select"
+          >
+            {countryPrefixes.map((prefix) => (
+              <option key={prefix.code} value={prefix.code}>
+                {prefix.name} ({prefix.code})
+              </option>
+            ))}
+          </select>
+          <input
+            type="text"
+            name="phoneNumber"
+            value={newAdmin.phoneNumber}
+            onChange={handleInputChange}
+            placeholder="Enter phone number"
+            className="admin-input"
+            pattern="\d*" // Ensure only digits are allowed
+          />
+        </div>
+
         <input
           type="file"
           name="companyLogo"
@@ -137,6 +196,7 @@ function Admin() {
               <th>Username</th>
               <th>Company Name</th>
               <th>Company Description</th>
+              <th>Phone Number</th> {/* Added Phone Number Column */}
               <th>Actions</th>
             </tr>
           </thead>
@@ -146,6 +206,7 @@ function Admin() {
                 <td>{admin.username}</td>
                 <td>{admin.companyName}</td>
                 <td>{admin.companyDesc}</td>
+                <td>{admin.countryPrefix} {admin.phoneNumber}</td> {/* Display Phone Number with prefix */}
                 <td>
                   <button
                     onClick={() => openModal('view', admin)}
@@ -211,6 +272,8 @@ function Admin() {
                   <br />
                   <strong>Company Description:</strong> {modalData.companyDesc}
                   <br />
+                  <strong>Phone Number:</strong> {modalData.countryPrefix} {modalData.phoneNumber} {/* Display Phone Number with prefix */}
+                  <br />
                   <strong>Company Logo:</strong>{' '}
                   {modalData.companyLogo ? modalData.companyLogo.name : 'Not uploaded'}
                 </p>
@@ -247,6 +310,14 @@ function Admin() {
                     value={newAdmin.companyDesc}
                     onChange={handleInputChange}
                     placeholder="Enter company description"
+                    className="modal-input"
+                  />
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    value={newAdmin.phoneNumber}
+                    onChange={handleInputChange}
+                    placeholder="Enter phone number"
                     className="modal-input"
                   />
                 </>

@@ -8,6 +8,8 @@ import Dash from './components/Dash'; // Import the Dash component (formerly Das
 import InfoSection from './components/InfoSection';
 import Admins from './components/Admins';
 import CorAdmin from './components/CorAdmin'; // Import the Admins component
+import ForgotPasswordPage from './components/ForgotPasswordPage'; // Import Forgot Password Page
+import ResetPasswordPage from './components/ResetPasswordPage'; // Import Reset Password Page
 import './App.css';
 import './components/Responsive.css';
 
@@ -46,6 +48,12 @@ function App() {
         {/* Route for Admins */}
         <Route path="/admins" element={<Admins />} /> {/* New route for Admins component */}
         <Route path="/admin" element={<CorAdmin />} /> {/* Updated route for CorAdmin */}
+
+        {/* Route for Forgot Password */}
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} /> {/* Forgot Password Page */}
+
+        {/* Route for Reset Password */}
+        <Route path="/reset-password" element={<ResetPasswordPage />} /> {/* Reset Password Page */}
       </Routes>
 
       {/* Footer Section */}

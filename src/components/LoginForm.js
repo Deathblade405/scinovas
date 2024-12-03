@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaUserAlt, FaEye, FaEyeSlash, FaLock, FaRegWindowClose } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
@@ -10,16 +10,13 @@ function LoginForm() {
   const [error, setError] = useState({ username: '', password: '' });
   const navigate = useNavigate();
 
-  // SuperAdmin credentials
   const SUPERADMIN_USERNAME = 'padmaraj';
   const SUPERADMIN_PASSWORD = 'padmaraj@2024';
 
-  // Function to validate the form
   const validateForm = () => {
     let isValid = true;
     const newError = { username: '', password: '' };
 
-    // Username validation
     if (username === '') {
       newError.username = 'Username cannot be empty.';
       isValid = false;
@@ -28,7 +25,6 @@ function LoginForm() {
       isValid = false;
     }
 
-    // Password validation
     if (password === '') {
       newError.password = 'Password cannot be empty.';
       isValid = false;
@@ -41,14 +37,12 @@ function LoginForm() {
     return isValid;
   };
 
-  // Trigger validation on form submit
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Check for SuperAdmin credentials
     if (username === SUPERADMIN_USERNAME && password === SUPERADMIN_PASSWORD) {
       console.log('SuperAdmin logged in!');
-      navigate('/admin'); // Redirect to the Admins page
+      navigate('/admin');
       return;
     }
 
@@ -58,35 +52,32 @@ function LoginForm() {
     navigate('/dashboard');
   };
 
-  // Handle toggle for password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const handleForgotPassword = () => {
-    navigate('/forgot-password');
+    navigate('/forgot-password'); // Redirect to the Forgot Password page
   };
 
   const handleResetPassword = () => {
-    navigate('/reset-password');
+    navigate('/reset-password'); // Redirect to the Reset Password page
   };
 
   const goToSignup = () => {
     navigate('/signup');
   };
 
-  // Reset the form fields
   const handleReset = () => {
     setUsername('');
     setPassword('');
-    setError({ username: '', password: '' }); // Clear any validation errors
+    setError({ username: '', password: '' });
   };
 
   return (
     <div className="login-form-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        {/* Display username validation error */}
         {error.username && <div className="error-message">{error.username}</div>}
         <label>Username</label>
         <div className="input-group">
@@ -99,7 +90,6 @@ function LoginForm() {
           />
         </div>
 
-        {/* Display password validation error */}
         {error.password && <div className="error-message">{error.password}</div>}
         <label>Password</label>
         <div className="input-group">
@@ -120,7 +110,6 @@ function LoginForm() {
           <FaRegWindowClose onClick={handleReset} className="reset-icon" />
         </div>
 
-        {/* Links for additional actions */}
         <div className="horizontal-links">
           <span onClick={handleForgotPassword} className="link">
             Forgot Password?
