@@ -24,6 +24,7 @@ h1 {
   margin: 0;
 }
 
+/* Logout Button Styles */
 .logout-button {
   background-color: #ff4d4d;
   color: white;
@@ -36,5 +37,47 @@ h1 {
 }
 
 .logout-button:hover {
+  background-color: #e04343;
+}
+
+/* Logout Modal */
+.logout-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.modal-actions {
+  margin-top: 20px;
+}
+
+.modal-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 10px;
+}
+
+.modal-button:hover {
   background-color: #e04343;
 }

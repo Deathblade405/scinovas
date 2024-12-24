@@ -8,6 +8,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState({ username: '', password: '' });
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);  // State to track if the user is superadmin
   const navigate = useNavigate();
 
   const SUPERADMIN_USERNAME = 'padmaraj';
@@ -41,15 +42,19 @@ function LoginForm() {
     e.preventDefault();
 
     if (username === SUPERADMIN_USERNAME && password === SUPERADMIN_PASSWORD) {
+      // SuperAdmin login
       console.log('SuperAdmin logged in!');
-      navigate('/admin');
+      setIsSuperAdmin(true); // Set the superadmin flag to true
+      navigate('/Dashboard', { state: { isSuperAdmin: true } });  // Pass superadmin flag to Dashboard
       return;
     }
 
     if (!validateForm()) return;
 
+    // Normal user login
     console.log('Logged in with:', username, password);
-    navigate('/dashboard');
+    setIsSuperAdmin(false); // Set the superadmin flag to false
+    navigate('/dashboard', { state: { isSuperAdmin: false } });  // Pass normal user flag to Dashboard
   };
 
   const togglePasswordVisibility = () => {
@@ -62,10 +67,6 @@ function LoginForm() {
 
   const handleResetPassword = () => {
     navigate('/reset-password'); // Redirect to the Reset Password page
-  };
-
-  const goToSignup = () => {
-    navigate('/signup');
   };
 
   const handleReset = () => {
@@ -107,7 +108,6 @@ function LoginForm() {
 
         <div className="form-buttons">
           <button type="submit">Login</button>
-          <FaRegWindowClose onClick={handleReset} className="reset-icon" />
         </div>
 
         <div className="horizontal-links">
@@ -116,9 +116,6 @@ function LoginForm() {
           </span>
           <span onClick={handleResetPassword} className="link">
             Reset Password
-          </span>
-          <span onClick={goToSignup} className="link">
-            Sign Up
           </span>
         </div>
       </form>

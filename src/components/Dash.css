@@ -1,13 +1,14 @@
 /* General dashboard styling */
 .dashboard {
-  padding: 20px;
   font-family: 'Roboto', sans-serif; /* Clean, professional font */
   background-color: #f8fafc; /* Light, modern background */
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
+  height: 100vh; /* Ensure it takes full viewport height */
+  overflow: hidden; /* Prevent scrolling */
+  margin: 0;
+  padding: 0;
 }
 
 /* Header container for logo, action buttons, and logout */
@@ -19,10 +20,10 @@
   padding: 15px 25px;
   background: linear-gradient(135deg, #263859, #1c2541); /* Gradient background for modern feel */
   color: white;
-  border-radius: 12px;
-  margin-bottom: 25px;
+  margin-bottom: 0; /* Remove bottom margin */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly deeper shadow */
-  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  flex-shrink: 0; /* Prevent header from shrinking */
+  z-index: 1; /* Keep it on top */
 }
 
 /* Actions section (Admins and Generate Test QR buttons) */
@@ -83,18 +84,13 @@
   padding: 20px;
   border-radius: 12px;
   width: 100%;
-  max-width: 350px;
-  margin-bottom: 20px;
+  max-width: 500px;
   position: relative;
   align-self: flex-start;
-  transition: transform 0.3s ease;
+  margin: 20px 0; /* Margin for spacing between filter and table */
 }
 
-.dashboard-filter:hover {
-  transform: translateY(-3px); /* Subtle lift effect */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
+/* The input field styling */
 .dashboard-filter input {
   padding: 12px 18px;
   font-size: 1rem;
@@ -103,27 +99,68 @@
   border: 2px solid #ddd;
   background-color: #f9f9f9;
   transition: border-color 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  box-sizing: border-box;
+  margin-top: 15px;
 }
 
+/* Focus styling for the input */
 .dashboard-filter input:focus {
   border-color: #4CAF50;
   outline: none;
   background-color: white;
 }
 
+/* Label styling to float on top of the input */
+.dashboard-filter label {
+  position: absolute;
+  left: 30px;
+  top: 56%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #777;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  z-index: 1;
+}
+
+/* When the input is focused or has text, the label floats above the input */
+.dashboard-filter input:focus + label,
+.dashboard-filter input:not(:placeholder-shown) + label {
+  top: 27px;
+  left: 25px;
+  font-size: 0.85rem;
+  color: #4CAF50; /* Green when focused */
+}
+
+/* Additional input box style for more clarity */
+.dashboard-filter input::placeholder {
+  color: transparent; /* Hide the default placeholder */
+}
+
+/* Adjust label placement when input is focused */
+.dashboard-filter input:focus::placeholder {
+  color: transparent; /* Ensure placeholder is invisible when focused */
+}
+
 /* Table styling */
 .dashboard-table {
   background-color: white;
   border-radius: 12px;
-  margin-top: 20px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
+  max-height: calc(100vh - 300px); /* Prevent scrolling, fit table in remaining space */
+  flex-grow: 1;
+  overflow: hidden; /* Disable scrolling */
+  display: flex;
+  flex-direction: column;
 }
 
 .dashboard-table table {
   width: 100%;
   border-collapse: collapse;
+  flex-grow: 1;
 }
 
 .dashboard-table th,
@@ -188,12 +225,12 @@
 
 @keyframes fadeIn {
   from {
-      opacity: 0;
-      transform: scale(0.95);
+    opacity: 0;
+    transform: scale(0.95);
   }
   to {
-      opacity: 1;
-      transform: scale(1);
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -235,49 +272,78 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .dashboard-header {
-      flex-direction: column;
-      gap: 15px;
-      text-align: center;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
   }
 
   .dashboard-actions {
-      flex-direction: column;
-      gap: 10px;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .action-button {
-      width: 100%;
+    width: 100%;
   }
 
   .dashboard-filter {
-      width: 100%;
-  }
-
-  .dashboard-table {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+    width: 100%;
   }
 
   .dashboard-table table {
-      min-width: 700px; /* Ensure table fits horizontally */
+    min-width: 700px;
   }
 
   .logout-button,
   .action-button {
-      font-size: 0.9rem;
-      padding: 10px;
+    font-size: 0.9rem;
+    padding: 10px;
   }
 
   .modal-content {
-      padding: 20px;
+    padding: 20px;
   }
 
   .modal-actions {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .modal-button {
-      width: 100%;
-      padding: 10px;
+    width: 100%;
+    padding: 10px;
   }
+}
+
+/* Pagination Controls */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #1c2541;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #14203a;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1rem;
+  color: #444;
 }

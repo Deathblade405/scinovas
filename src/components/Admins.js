@@ -12,7 +12,6 @@ function Admins() {
     companyLogo: null,
   });
   const [filterText, setFilterText] = useState(''); // State for the filter text
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [error, setError] = useState(''); // State for error messages
 
   const navigate = useNavigate(); // React Router navigation
@@ -70,29 +69,15 @@ function Admins() {
     );
   });
 
-  const handleLogout = () => {
-    setShowLogoutModal(true);
-  };
-
-  const confirmLogout = () => {
-    setShowLogoutModal(false);
-    window.location.href = '/'; // Redirect to login
-  };
-
-  const cancelLogout = () => {
-    setShowLogoutModal(false);
-  };
-
   const navigateToDashboard = () => {
     navigate('/dashboard'); // Navigate to the dashboard page
   };
 
   return (
     <div className="admins-page">
-      {/* Header Section with Dashboard Button and Logout Button */}
+      {/* Header Section with Dashboard Button */}
       <div className="admins-header">
         <button onClick={navigateToDashboard} className="nav-button">Dashboard</button>
-        <button onClick={handleLogout} className="logout-button">Logout</button>
       </div>
 
       {/* Content Section */}
@@ -188,19 +173,6 @@ function Admins() {
           </table>
         </div>
       </div>
-
-      {/* Logout Confirmation Modal */}
-      {showLogoutModal && (
-        <div className="logout-modal">
-          <div className="modal-content">
-            <p>Are you sure you want to logout?</p>
-            <div className="modal-actions">
-              <button onClick={confirmLogout} className="modal-button">Yes</button>
-              <button onClick={cancelLogout} className="modal-button">No</button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

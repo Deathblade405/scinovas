@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -14,10 +14,12 @@ import './App.css';
 import './components/Responsive.css';
 
 function App() {
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);  // State to track if the user is superadmin
+
   return (
     <Router>
-      {/* Header Section */}
-      <Header />
+      {/* Pass isSuperAdmin state to Header to manage logout button visibility */}
+      <Header isSuperAdmin={isSuperAdmin} />
 
       <Routes>
         {/* Route for Login Form */}
@@ -26,7 +28,7 @@ function App() {
           element={
             <div className="main-content">
               <InfoSection /> {/* Info Section */}
-              <LoginForm />   {/* Login Form */}
+              <LoginForm setIsSuperAdmin={setIsSuperAdmin} /> {/* Pass setIsSuperAdmin to LoginForm */}
             </div>
           }
         />
@@ -43,7 +45,7 @@ function App() {
         />
 
         {/* Route for Dashboard */}
-        <Route path="/dashboard" element={<Dash />} /> {/* Update the route to use Dash component */}
+        <Route path="/dashboard" element={<Dash isSuperAdmin={isSuperAdmin} />} /> {/* Pass isSuperAdmin to Dash */}
 
         {/* Route for Admins */}
         <Route path="/admins" element={<Admins />} /> {/* New route for Admins component */}
